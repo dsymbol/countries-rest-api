@@ -1,0 +1,462 @@
+{
+    "paths": {
+        "/api/country": {
+            "get": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Read All Countries",
+                "operationId": "read_all_countries_api_country_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "name": "United States",
+                                        "capital": "Washington",
+                                        "language": "English",
+                                        "currency": "USD",
+                                        "population": 334454094
+                                    },
+                                    {
+                                        "name": "United Kingdom",
+                                        "capital": "London",
+                                        "language": "English",
+                                        "currency": "GBP",
+                                        "population": 68519283
+                                    },
+                                    {
+                                        "name": "Spain",
+                                        "capital": "Madrid",
+                                        "language": "Spanish",
+                                        "currency": "EUR",
+                                        "population": 46786601
+                                    },
+                                    {
+                                        "name": "Israel",
+                                        "capital": "Jerusalem",
+                                        "language": "Hebrew",
+                                        "currency": "ILS",
+                                        "population": 8901435
+                                    },
+                                    {
+                                        "name": "Italy",
+                                        "capital": "Rome",
+                                        "language": "Italian",
+                                        "currency": "EUR",
+                                        "population": 60306224
+                                    },
+                                    {
+                                        "name": "Sweden",
+                                        "capital": "Stockholm",
+                                        "language": "Swedish",
+                                        "currency": "SEK",
+                                        "population": 10211335
+                                    },
+                                    {
+                                        "name": "Greece",
+                                        "capital": "Athens",
+                                        "language": "Greek",
+                                        "currency": "EUR",
+                                        "population": 10334599
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not Found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/country/{name}": {
+            "get": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Read By Name",
+                "operationId": "read_by_name_api_country__name__get",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Name",
+                            "type": "string"
+                        },
+                        "name": "name",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "name": "Israel",
+                                        "capital": "Jerusalem",
+                                        "language": "Hebrew",
+                                        "currency": "ILS",
+                                        "population": 8901435
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not Found"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Update Country",
+                "operationId": "update_country_api_country__name__put",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Name",
+                            "type": "string"
+                        },
+                        "name": "name",
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Payload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Country updated"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not Found"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Missing JSON data"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Create Country",
+                "operationId": "create_country_api_country__name__post",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Name",
+                            "type": "string"
+                        },
+                        "name": "name",
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Payload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Country created"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not Found"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Missing JSON data"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Read By Name",
+                "operationId": "read_by_name_api_country__name__delete",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Name",
+                            "type": "string"
+                        },
+                        "name": "name",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Country deleted"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not Found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/capital/{capital}": {
+            "get": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Read By Capital",
+                "operationId": "read_by_capital_api_capital__capital__get",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Capital",
+                            "type": "string"
+                        },
+                        "name": "capital",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "name": "Israel",
+                                        "capital": "Jerusalem",
+                                        "language": "Hebrew",
+                                        "currency": "ILS",
+                                        "population": 8901435
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not Found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/language/{language}": {
+            "get": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Read By Language",
+                "operationId": "read_by_language_api_language__language__get",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Language",
+                            "type": "string"
+                        },
+                        "name": "language",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "name": "Israel",
+                                        "capital": "Jerusalem",
+                                        "language": "Hebrew",
+                                        "currency": "ILS",
+                                        "population": 8901435
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not Found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/currency/{currency}": {
+            "get": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Read By Currency",
+                "operationId": "read_by_currency_api_currency__currency__get",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Currency",
+                            "type": "string"
+                        },
+                        "name": "currency",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "name": "Israel",
+                                        "capital": "Jerusalem",
+                                        "language": "Hebrew",
+                                        "currency": "ILS",
+                                        "population": 8901435
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not Found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Payload": {
+                "title": "Payload",
+                "required": "",
+                "type": "object",
+                "properties": {
+                    "capital": {
+                        "title": "Capital",
+                        "type": "string"
+                    },
+                    "language": {
+                        "title": "Language",
+                        "type": "string"
+                    },
+                    "currency": {
+                        "title": "Currency",
+                        "type": "string"
+                    },
+                    "population": {
+                        "title": "Population",
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    }
+}
