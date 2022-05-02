@@ -1,11 +1,11 @@
-from cerberus import Validator
+import os
 import sqlite3
 import sys
-import os
+
+from cerberus import Validator
 
 PATH = os.path.realpath(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(os.path.dirname(PATH)))
-
 
 if not os.path.exists('countries.db'):
     raise Exception("Database file not found")
@@ -22,12 +22,22 @@ def format_data(tpl):
     return {'name': name, 'capital': capital, 'language': language, 'currency': currency, 'population': population}
 
 
-def get_all_countries():
+def get_all_countries(gt: int = None, lt: int = None):
     """
     Returns all countries and their data
     """
-    c.execute("SELECT * FROM countries")
-    result = c.fetchall()
+    if gt and not lt:
+        c.execute("SELECT * FROM countries WHERE population > :gt", {'gt': gt})
+        result = c.fetchall()
+    elif lt and not gt:
+        c.execute("SELECT * FROM countries WHERE population < :lt", {'lt': lt})
+        result = c.fetchall()
+    elif gt and lt:
+        c.execute("SELECT * FROM countries WHERE population > :gt AND population < :lt", {'gt': gt, 'lt': lt})
+        result = c.fetchall()
+    else:
+        c.execute("SELECT * FROM countries")
+        result = c.fetchall()
     data = []
     [data.append(format_data(i)) for i in result if result]
     return data
@@ -84,9 +94,6 @@ def update_country(name, d: dict):
     """
     Updates a country by name based on passed in data
     """
-    if not d:
-        return False, "Missing JSON payload"
-
     schema = {'capital': {'type': 'string'}, 'language': {'type': 'string'}, 'currency': {'type': 'string'},
               'population': {'type': 'integer'}}
     v = Validator(schema)

@@ -4,7 +4,6 @@ This test file contains getting country data tests
 
 import pytest
 
-
 countries = [('Spain', 200),
              ('United States', 200),
              ('Uganda', 404)]

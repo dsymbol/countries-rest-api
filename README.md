@@ -5,7 +5,7 @@ I am well aware of SQLAlchemy, however I wanted to implement the functions to in
 
 ## Endpoints
 
-![endpoints](https://user-images.githubusercontent.com/88138099/162627056-2e10342e-5ca6-4ecd-9fc0-00b24fa72eb3.png)
+![endpoints](https://user-images.githubusercontent.com/88138099/165749658-d1c6b224-fd55-4adf-895c-b48f6ae3e2bd.png)
 
 ## Installation
 
@@ -39,6 +39,7 @@ You can view the API docs by visiting http://127.0.0.1:5000
 Tests are independent of each other, database must be reset after every test file ran.
 
 **Example**
+
 ```bash
 python3 utils/populate_database.py
 python3 -m uvicorn --port 5000 server:app

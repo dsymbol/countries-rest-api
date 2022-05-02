@@ -19,6 +19,6 @@ def test_update_country_partial_payload(client, payload):
 
 
 def test_update_country_no_payload(client):
-    r = client.update_country('United+States', {})
-    assert r.status_code == 422
-    assert r.json()['message'] == "Missing JSON payload"
+    r = client.update_country('United+States')
+    assert r.status_code == 200
+    assert r.json()['message'] == "Country updated"

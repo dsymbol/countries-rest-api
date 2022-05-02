@@ -1,15 +1,19 @@
-from pathlib import Path
-import sqlite3
 import os
+import sqlite3
+from pathlib import Path
 
-root_path = str(Path(__file__).parents[1])
-information = [('United States', 'Washington', 'English', 'USD', 334_454_094),
-               ('United Kingdom', 'London', 'English', 'GBP', 68_519_283),
-               ('Spain', 'Madrid', 'Spanish', 'EUR', 46_786_601),
-               ('Israel', 'Jerusalem', 'Hebrew', 'ILS', 8_901_435),
-               ('Italy', 'Rome', 'Italian', 'EUR', 60_306_224),
-               ('Sweden', 'Stockholm', 'Swedish', 'SEK', 10_211_335),
-               ('Greece', 'Athens', 'Greek', 'EUR', 10_334_599)]
+from scrape_data import scrape_population
+
+root_path = str(Path(os.path.abspath(__file__)).parents[1])
+countries = ['United States', 'United Kingdom', 'Spain', 'Israel', 'Italy', 'Sweden', 'Greece']
+population = scrape_population(countries)
+information = [(countries[0], 'Washington', 'English', 'USD', population[0]),
+               (countries[1], 'London', 'English', 'GBP', population[1]),
+               (countries[2], 'Madrid', 'Spanish', 'EUR', population[2]),
+               (countries[3], 'Jerusalem', 'Hebrew', 'ILS', population[3]),
+               (countries[4], 'Rome', 'Italian', 'EUR', population[4]),
+               (countries[5], 'Stockholm', 'Swedish', 'SEK', population[5]),
+               (countries[6], 'Athens', 'Greek', 'EUR', population[6])]
 
 if os.path.exists(f'{root_path}/countries.db'):
     os.remove(f'{root_path}/countries.db')
@@ -18,7 +22,7 @@ conn = sqlite3.connect(f'{root_path}/countries.db')
 c = conn.cursor()
 
 c.execute("""CREATE TABLE countries (
-            name text,
+            name text PRIMARY KEY,
             capital text,
             language text,
             currency text,

@@ -18,49 +18,113 @@
                                         "capital": "Washington",
                                         "language": "English",
                                         "currency": "USD",
-                                        "population": 334454094
+                                        "population": 331002651
                                     },
                                     {
                                         "name": "United Kingdom",
                                         "capital": "London",
                                         "language": "English",
                                         "currency": "GBP",
-                                        "population": 68519283
+                                        "population": 67886011
                                     },
                                     {
                                         "name": "Spain",
                                         "capital": "Madrid",
                                         "language": "Spanish",
                                         "currency": "EUR",
-                                        "population": 46786601
+                                        "population": 46754778
                                     },
                                     {
                                         "name": "Israel",
                                         "capital": "Jerusalem",
                                         "language": "Hebrew",
                                         "currency": "ILS",
-                                        "population": 8901435
+                                        "population": 8655535
                                     },
                                     {
                                         "name": "Italy",
                                         "capital": "Rome",
                                         "language": "Italian",
                                         "currency": "EUR",
-                                        "population": 60306224
+                                        "population": 60461826
                                     },
                                     {
                                         "name": "Sweden",
                                         "capital": "Stockholm",
                                         "language": "Swedish",
                                         "currency": "SEK",
-                                        "population": 10211335
+                                        "population": 10099265
                                     },
                                     {
                                         "name": "Greece",
                                         "capital": "Athens",
                                         "language": "Greek",
                                         "currency": "EUR",
-                                        "population": 10334599
+                                        "population": 10423054
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Not Found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/country/population": {
+            "get": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Read By Population",
+                "operationId": "read_by_population_api_country_population_get",
+                "parameters": [
+                    {
+                        "required": false,
+                        "schema": {
+                            "title": "Gt",
+                            "type": "integer"
+                        },
+                        "name": "gt",
+                        "in": "query"
+                    },
+                    {
+                        "required": false,
+                        "schema": {
+                            "title": "Lt",
+                            "type": "integer"
+                        },
+                        "name": "lt",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "name": "United Kingdom",
+                                        "capital": "London",
+                                        "language": "English",
+                                        "currency": "GBP",
+                                        "population": 67886011
+                                    },
+                                    {
+                                        "name": "Italy",
+                                        "capital": "Rome",
+                                        "language": "Italian",
+                                        "currency": "EUR",
+                                        "population": 60461826
                                     }
                                 ]
                             }
@@ -108,7 +172,7 @@
                                         "capital": "Jerusalem",
                                         "language": "Hebrew",
                                         "currency": "ILS",
-                                        "population": 8901435
+                                        "population": 8655535
                                     }
                                 ]
                             }
@@ -316,7 +380,7 @@
                                         "capital": "Jerusalem",
                                         "language": "Hebrew",
                                         "currency": "ILS",
-                                        "population": 8901435
+                                        "population": 8655535
                                     }
                                 ]
                             }
@@ -364,7 +428,7 @@
                                         "capital": "Jerusalem",
                                         "language": "Hebrew",
                                         "currency": "ILS",
-                                        "population": 8901435
+                                        "population": 8655535
                                     }
                                 ]
                             }
@@ -412,7 +476,7 @@
                                         "capital": "Jerusalem",
                                         "language": "Hebrew",
                                         "currency": "ILS",
-                                        "population": 8901435
+                                        "population": 8655535
                                     }
                                 ]
                             }
@@ -450,10 +514,6 @@
                     "currency": {
                         "title": "Currency",
                         "type": "string"
-                    },
-                    "population": {
-                        "title": "Population",
-                        "type": "integer"
                     }
                 }
             }

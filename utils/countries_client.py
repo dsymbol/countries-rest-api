@@ -21,6 +21,18 @@ class CountriesClient():
         r = requests.get(f'{self.BASE_URI}/language/{language}', headers={'Content-Type': 'application/json'})
         return r
 
+    def get_country_by_population(self, gt: int = None, lt: int = None):
+        if gt and not lt:
+            r = requests.get(f'{self.BASE_URI}/country/population?gt={gt}',
+                             headers={'Content-Type': 'application/json'})
+        elif lt and not gt:
+            r = requests.get(f'{self.BASE_URI}/country/population?lt={lt}',
+                             headers={'Content-Type': 'application/json'})
+        elif gt and lt:
+            r = requests.get(f'{self.BASE_URI}/country/population?gt={gt}&lt={lt}',
+                             headers={'Content-Type': 'application/json'})
+        return r
+
     def get_country_by_currency(self, currency):
         r = requests.get(f'{self.BASE_URI}/currency/{currency}', headers={'Content-Type': 'application/json'})
         return r
@@ -33,6 +45,6 @@ class CountriesClient():
         d = requests.delete(f"{self.BASE_URI}/country/{name}", headers={'Content-Type': 'application/json'})
         return d
 
-    def update_country(self, name, payload):
+    def update_country(self, name, payload={}):
         p = requests.put(f"{self.BASE_URI}/country/{name}", json=payload, headers={'Content-Type': 'application/json'})
         return p

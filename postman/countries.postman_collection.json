@@ -126,6 +126,40 @@
 			"response": []
 		},
 		{
+			"name": "GET by population",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/country/population?gt=47754778&lt=321002651",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"country",
+						"population"
+					],
+					"query": [
+						{
+							"key": "gt",
+							"value": "47754778"
+						},
+						{
+							"key": "lt",
+							"value": "321002651"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Update country",
 			"request": {
 				"method": "PUT",

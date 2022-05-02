@@ -1,12 +1,13 @@
-from utils.countries_client import CountriesClient
 import pytest
+
+from utils.countries_client import CountriesClient
 
 
 @pytest.fixture
-def client(scope='session'):
+def client():
     return CountriesClient()
 
 
 @pytest.fixture
 def payload():
-    return {'capital': 'TestCapital', 'language': 'TestLang', 'currency': 'TestCurrency', 'population': 12345}
+    return {'capital': 'TestCapital', 'language': 'TestLang', 'currency': 'TestCurrency'}

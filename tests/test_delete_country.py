@@ -4,7 +4,6 @@ This test file contains country deletion tests
 
 import pytest
 
-
 to_delete = [('United Kingdom', 200),
              ('United States', 200),
              ('Israel', 200)]

@@ -2,12 +2,12 @@
 This test file contains schema validation tests
 """
 
-from cerberus import Validator
 import pytest
+from cerberus import Validator
 
 
 @pytest.fixture
-def cer_validate():
+def c():
     return Validator(schema, require_all=True)
 
 
@@ -16,12 +16,12 @@ schema = {'name': {'type': 'string'}, 'capital': {'type': 'string'},
           'population': {'type': 'integer'}}
 
 
-def test_one_country_schema(client, cer_validate, country="United States"):
+def test_one_country_schema(client, c, country="United States"):
     response = client.get_country_by_name(country).json()
-    assert cer_validate.validate(response[0])
+    assert c.validate(response[0])
 
 
-def test_all_countries_schema(client, cer_validate):
+def test_all_countries_schema(client, c):
     response = client.get_all_countries().json()
     for country in response:
-        assert cer_validate.validate(country)
+        assert c.validate(country)
