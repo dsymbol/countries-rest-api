@@ -4,7 +4,7 @@ from pathlib import Path
 
 from scrape_data import scrape_population
 
-root_path = str(Path(os.path.abspath(__file__)).parents[1])
+DATABASE_PATH = os.path.join(str(Path(os.path.abspath(__file__)).parents[1]), 'countries.db')
 countries = ['United States', 'United Kingdom', 'Spain', 'Israel', 'Italy', 'Sweden', 'Greece']
 population = scrape_population(countries)
 information = [(countries[0], 'Washington', 'English', 'USD', population[0]),
@@ -15,10 +15,11 @@ information = [(countries[0], 'Washington', 'English', 'USD', population[0]),
                (countries[5], 'Stockholm', 'Swedish', 'SEK', population[5]),
                (countries[6], 'Athens', 'Greek', 'EUR', population[6])]
 
-if os.path.exists(f'{root_path}/countries.db'):
-    os.remove(f'{root_path}/countries.db')
+os.path.join(DATABASE_PATH)
+if os.path.exists(DATABASE_PATH):
+    os.remove(DATABASE_PATH)
 
-conn = sqlite3.connect(f'{root_path}/countries.db')
+conn = sqlite3.connect(DATABASE_PATH)
 c = conn.cursor()
 
 c.execute("""CREATE TABLE countries (

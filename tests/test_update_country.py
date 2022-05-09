@@ -11,7 +11,7 @@ def test_update_country_full_payload(client, payload):
 
 
 def test_update_country_partial_payload(client, payload):
-    r = client.update_country('Israel', {'language': payload['language'], 'currency': payload['currency']})
+    r = client.partially_update_country('Israel', {'language': payload['language'], 'currency': payload['currency']})
     assert r.status_code == 200
     response = client.get_country_by_name('Israel')
     assert response.json()[0]['language'] == 'TestLang' and response.json()[0][
@@ -19,6 +19,6 @@ def test_update_country_partial_payload(client, payload):
 
 
 def test_update_country_no_payload(client):
-    r = client.update_country('United+States')
+    r = client.partially_update_country('United+States')
     assert r.status_code == 200
     assert r.json()['message'] == "Country updated"

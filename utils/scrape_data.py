@@ -4,10 +4,8 @@ from pathlib import Path
 import requests
 from lxml import html
 
-root_path = str(Path(os.path.abspath(__file__)).parents[1])
-
 country_list = []
-with open(f'{root_path}/data/country_list.txt', 'r') as f:
+with open(os.path.join(str(Path(os.path.abspath(__file__)).parents[1]), 'data', 'country_list.txt')) as f:
     for line in f:
         country_list.append(line.rstrip())
 

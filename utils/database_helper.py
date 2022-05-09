@@ -1,16 +1,15 @@
 import os
 import sqlite3
-import sys
+from pathlib import Path
 
 from cerberus import Validator
 
-PATH = os.path.realpath(os.path.abspath(__file__))
-sys.path.insert(0, os.path.dirname(os.path.dirname(PATH)))
+DATABASE_PATH = os.path.join(str(Path(os.path.abspath(__file__)).parents[1]), 'countries.db')
 
-if not os.path.exists('countries.db'):
+if not os.path.exists(DATABASE_PATH):
     raise Exception("Database file not found")
 
-conn = sqlite3.connect('countries.db', check_same_thread=False)
+conn = sqlite3.connect(DATABASE_PATH, check_same_thread=False)
 c = conn.cursor()
 
 
@@ -91,6 +90,26 @@ def delete_country(name):
 
 
 def update_country(name, d: dict):
+    """
+    Updates a country by name based on passed in data
+    """
+    schema = {'capital': {'type': 'string'}, 'language': {'type': 'string'}, 'currency': {'type': 'string'},
+              'population': {'type': 'integer'}}
+    v = Validator(schema, require_all=True)
+    result = v.validate(d)
+    errors = v.errors
+
+    if not result:
+        return result, errors
+
+    c.execute("""UPDATE countries SET name = :name, capital = :capital, language = :language, currency = :currency, 
+                population = :population WHERE LOWER(name) = :name""",
+              {'name': name.lower(), 'capital': d['capital'], 'language': d['language'], 'currency': d['currency'],
+               'population': d['population']})
+    return result, errors
+
+
+def partially_update_country(name, d: dict):
     """
     Updates a country by name based on passed in data
     """

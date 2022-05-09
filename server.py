@@ -74,10 +74,8 @@ def create_country(name: str, payload: dict):
     name = replace_with_space(name)
     name = scrape_data.validate_country_name(name)
     if not name:
-        return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content={"message": "Invalid or non "
-                                                                                                  "existent country "
-                                                                                                  "name: refer to "
-                                                                                                  "data/country_list.txt"})
+        return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                            content={"message": "Invalid or non existent country name: refer to data/country_list.txt"})
     result = db.get_country(name=name)
     if result:
         return JSONResponse(status_code=status.HTTP_409_CONFLICT,
@@ -100,20 +98,36 @@ def read_by_name(name: str):
 
 
 @app.put("/api/country/{name}", tags=["Country"])
-def update_country(name: str, payload: Optional[dict] = {}):
+def update_country(name: str, payload: dict):
     name = replace_with_space(name)
     name = scrape_data.validate_country_name(name)
     if not name:
-        return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content={"message": "Invalid or non "
-                                                                                                  "existent country "
-                                                                                                  "name: refer to "
-                                                                                                  "data/country_list.txt"})
+        return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                            content={"message": "Invalid or non existent country name: refer to data/country_list.txt"})
     result = db.get_country(name=name)
     if not result:
         return JSONResponse(status_code=status.HTTP_404_NOT_FOUND,
                             content={"message": "Could not find a country with that name"})
     payload.update(dict(population=scrape_data.scrape_population(name)))
     result, errors = db.update_country(name, payload)
+    if not result:
+        return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content={"message": errors})
+    return JSONResponse(status_code=status.HTTP_200_OK, content={"message": 'Country updated'})
+
+
+@app.patch("/api/country/{name}", tags=["Country"])
+def partially_update_country(name: str, payload: Optional[dict] = {}):
+    name = replace_with_space(name)
+    name = scrape_data.validate_country_name(name)
+    if not name:
+        return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                            content={"message": "Invalid or non existent country name: refer to data/country_list.txt"})
+    result = db.get_country(name=name)
+    if not result:
+        return JSONResponse(status_code=status.HTTP_404_NOT_FOUND,
+                            content={"message": "Could not find a country with that name"})
+    payload.update(dict(population=scrape_data.scrape_population(name)))
+    result, errors = db.partially_update_country(name, payload)
     if not result:
         return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content={"message": errors})
     return JSONResponse(status_code=status.HTTP_200_OK, content={"message": 'Country updated'})

@@ -45,6 +45,10 @@ class CountriesClient():
         d = requests.delete(f"{self.BASE_URI}/country/{name}", headers={'Content-Type': 'application/json'})
         return d
 
-    def update_country(self, name, payload={}):
+    def update_country(self, name, payload):
         p = requests.put(f"{self.BASE_URI}/country/{name}", json=payload, headers={'Content-Type': 'application/json'})
+        return p
+
+    def partially_update_country(self, name, payload={}):
+        p = requests.patch(f"{self.BASE_URI}/country/{name}", json=payload, headers={'Content-Type': 'application/json'})
         return p
