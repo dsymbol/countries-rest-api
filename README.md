@@ -41,7 +41,7 @@ Tests are independent of each other, database must be reset after every test fil
 **Example**
 
 ```bash
-python3 utils/populate_database.py
+python3 utils/build_database.py
 python3 -m uvicorn --port 5000 server:app
 python3 -m pytest tests/test_create_country.py
 ```
